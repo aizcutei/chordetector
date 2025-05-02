@@ -1,0 +1,43 @@
+[package]
+name = "chordetector"
+version = "0.1.0"
+edition = "2021"
+authors = ["aizcutei <aiz.cutei@gmail.com>"]
+license = "GPL-3.0-or-later"
+homepage = "https://www.aizcutei.com/chordetector"
+description = "Detect chord from audio"
+
+[workspace]
+members = ["xtask"]
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+atomic_float = "1.1.0"
+egui = "0.31.1"
+ndarray = { version = "0.16.1", features = ["serde", "rayon"] }
+
+# Remove the `assert_process_allocs` feature to allow allocations on the audio
+# thread in debug builds.
+nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", features = [
+    "assert_process_allocs",
+    "standalone",
+] }
+nih_plug_egui = { git = "https://github.com/robbert-vdh/nih-plug.git" }
+realfft = "3.4.0"
+
+rustfft = "6.2.0"
+tract-onnx = "0.21.11"
+# Uncomment the below line to disable the on-by-default VST3 feature to remove
+# the GPL compatibility requirement
+# nih_plug = { git = "https://github.com/robbert-vdh/nih-plug.git", default-features = false, features = ["assert_process_allocs"] }
+
+[profile.release]
+lto = "thin"
+strip = "symbols"
+
+[profile.profiling]
+inherits = "release"
+debug = true
+strip = "none"
