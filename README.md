@@ -1,7 +1,6 @@
 # Chordetector
 
-<video src="static/demo.mp4" width="320" height="240" controls></video>
-
+https://github.com/user-attachments/assets/3175db8e-08df-4bd4-9a92-99d9664fbf9e
 
 ## Building
 
